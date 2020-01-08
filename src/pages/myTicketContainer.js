@@ -6,9 +6,7 @@ import Container from '@material-ui/core/Container';
 
 import axios from 'axios';
 
-import Header from '../header/header'
-import PaymentFeed from './paymentFeed'
-import Footer from '../footer/footer'
+import MyTicketFeed from '../components/myTicketFeed'
 
 const useStyles = makeStyles(theme => ({
   paper :{
@@ -117,14 +115,14 @@ const useStyles = makeStyles(theme => ({
   
 }));
 
-const PaymentContainer = (props) => {
+const MyTickerContainer = (props) => {
   const classes = useStyles();
 
   const [orders, setOrders] = useState({ orders: [] });
 
   useEffect(() => {
   	const idUser = localStorage.getItem('id');
-    axios.get(`http://localhost:5000/api/v1/user/${idUser}/orders`, 
+    axios.get(`http://localhost:5000/api/v1/order/${idUser}/approved`, 
     {
     	headers:{
         authorization: "Bearer "+localStorage.getItem("token")
@@ -141,26 +139,19 @@ const PaymentContainer = (props) => {
       
   return (
     <Grid style={{backgroundColor: '#F3EDCE'}}>
-      <Header />
       <Container container className={classes.paper} maxWidth="md">
-  
+      
         <Grid className={classes.textFieldContainerLogin}>
           <Grid className={classes.textFieldContainer2}>
             <Grid className={classes.boxTypograhpy1}>
               <Typography className={classes.typography1} component="h1" variant="h4">
-                Payment
+                My Ticket
               </Typography>
             </Grid>
-						
-						<Grid container className={classes.textFieldContainer3}>
-							<Grid item md={6} className={classes.textFieldContainer5}>
-								<p>Payment</p>
-							</Grid>
-						</Grid>
 
 						<Grid className={classes.textFieldContainer4}>							
 						{Array.isArray(orders) && orders.map((item, index)=>
-							<PaymentFeed 
+							<MyTicketFeed 
 								key={index}
 								idOrder={item.id}
 								userName={item.orderedByUser.name}
@@ -178,11 +169,9 @@ const PaymentContainer = (props) => {
 						</Grid>
           </Grid>
         </Grid>
-      
       </Container>
-      <Footer />
     </Grid>
   );
 }
 
-export default PaymentContainer;
+export default MyTickerContainer;

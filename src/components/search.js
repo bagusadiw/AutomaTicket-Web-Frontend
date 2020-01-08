@@ -27,32 +27,25 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-export const Search = ({ 
-type, 
-placeHolder, 
-name, 
-handleChange, 
-handleSearch,
-handleClear, 
-searchMode }) => {
+export const Search = (props) => {
 	const classes = useStyles();
 	return(
 		<Grid className={classes.margin}>
-		<InputLabel 
-      htmlFor="standard-adornment-amount" 
-      className={classes.searchLabel}
-    >
-      {placeHolder}
-    </InputLabel>
-
 		<FormControl fullWidth>
+      <InputLabel 
+        htmlFor="standard-adornment-amount" 
+        className={classes.searchLabel}
+      >
+        {props.placeHolder}
+      </InputLabel>
       <Input
       	className={classes.searchInput}
-        type={type}
-      	name={name}
+        type={props.type}
+      	name={props.name}
         id="standard-adornment-amount"
-        onChange={handleChange}
-        onKeyPress={handleSearch}
+        onChange={props.handleChange}
+        onKeyPress={props.handleSearch}
+        value={props.value}
         startAdornment={
           <InputAdornment position="start">
             <Icon variant="contained" color="primary">
@@ -61,10 +54,10 @@ searchMode }) => {
           </InputAdornment>
         }
         endAdornment={
-          searchMode && 
+          props.searchMode && 
           (
           <InputAdornment position="end">
-            <IconButton onClick={handleClear} color="secondary">
+            <IconButton onClick={props.handleClear} color="secondary">
               <CancelIcon />
             </IconButton>
           </InputAdornment>

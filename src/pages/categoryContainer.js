@@ -5,9 +5,8 @@ import {withStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import moment from 'moment'
 
-import Header from '../header/header';
-import {Search} from '../search/search';
-import {EventCard} from '../event/eventCard';
+import {Search} from '../components/search';
+import {EventCard} from '../components/eventCard';
 
 const useStyles = (theme=>({
 	eventCard:{
@@ -55,7 +54,6 @@ class CategoryContainer extends Component {
 
     return (
     	<Grid>
-    		<Header />
     		<Container maxWidth='md' style={{display:'flex', flexDirection:'column'}}>
     			<Search 
 	      		placeHolder="Search by Date"

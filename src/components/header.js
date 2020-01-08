@@ -5,11 +5,11 @@ import { withStyles } from '@material-ui/core/styles';
 import {Link} from 'react-router-dom';
 import Container from '@material-ui/core/Container';
 
-import logo from '../../img/ticket.png'
-import ModalSign from '../modal/modal';
-import SignUp from '../sign/signUp';
-import SignIn from '../sign/signIn';
-import Dropdown from '../dropdown/dropdown';
+import logo from '../img/ticket.png'
+import ModalSign from './modal';
+import SignUp from './signUp';
+import SignIn from './signIn';
+import Dropdown from './dropdown';
 
 const useStyles = (theme => ({
   container: {

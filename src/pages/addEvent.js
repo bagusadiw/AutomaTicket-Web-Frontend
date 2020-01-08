@@ -8,9 +8,6 @@ import Container from '@material-ui/core/Container';
 
 import axios from 'axios';
 
-import Header from '../header/header'
-import Footer from '../footer/footer'
-
 const useStyles = makeStyles(theme => ({
   paper :{
     display: 'flex',
@@ -210,8 +207,6 @@ const AddEvent = (props) => {
       
   return (
     <Grid style={{backgroundColor: '#F3EDCE'}}>
-    {console.log(state.endTime)}
-      <Header />
       <Container container className={classes.paper} maxWidth="md">
   
         <Grid className={classes.textFieldContainerLogin}>
@@ -326,9 +321,8 @@ const AddEvent = (props) => {
             </Grid>
           </Grid>
         </Grid>
-      
+    
       </Container>
-      <Footer />
     </Grid>
   );
 }

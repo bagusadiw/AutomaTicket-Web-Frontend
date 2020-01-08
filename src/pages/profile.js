@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Header from "../header/header";
 import Typography from "@material-ui/core/Typography";
 import {
   Container,
@@ -10,9 +9,9 @@ import {
   TextField
 } from "@material-ui/core";
 
-import Footer from "../footer/footer";
-import {EventCard} from "../event/eventCard";
 import axios from "axios";
+
+import {EventCard} from "../components/eventCard";
 
 class Profile extends Component {
   constructor() {
@@ -56,7 +55,6 @@ class Profile extends Component {
           name: name,
           email: email,
           phone: phone,
-          password: password,
           image: image
         },
         {
@@ -103,10 +101,8 @@ class Profile extends Component {
   }
   render() {
     const favorite = this.state.favorite;
-    console.log(this.state.user)
     return (
       <div>
-        <Header />
         <Container maxWidth="lg" style={{ marginBottom: 40 }}>
           <div style={{ marginBottom: 30, marginTop: 40 }}>
             <Typography
@@ -231,7 +227,6 @@ class Profile extends Component {
             ))}
           </Grid>
         </Container>
-        <Footer />
       </div>
     );
   }

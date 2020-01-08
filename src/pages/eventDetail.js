@@ -11,8 +11,8 @@ import IconButton from '@material-ui/core/IconButton';
 import Paper from '@material-ui/core/Paper';
 import NumberFormat from 'react-number-format';
 
-import Header from '../header/header';
-import Footer from '../footer/footer';
+import Header from '../components/header';
+import Footer from '../components/footer';
 
 const useStyles = (theme=>({
 	container:{

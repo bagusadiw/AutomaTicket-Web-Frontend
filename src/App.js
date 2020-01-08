@@ -5,32 +5,33 @@ import {
   Route
 } from 'react-router-dom';
 
-import Home from './component/home/home'
-import CategoryContainer from './component/category/categoryContainer'
-import EventDetail from './component/event/eventDetail'
-import SignIn from './component/sign/signIn'
-import SignUp from './component/sign/signUp'
-import AddEvent from './component/event/addEvent'
-import Payment from './component/payment/paymentContainer'
-import MyTicket from './component/myTicket/myTicketContainer'
-import Profile from './component/profile/profile'
+import Header from './components/header';
+import Footer from './components/footer';
+import Home from './pages/home';
+import CategoryContainer from './pages/categoryContainer'
+import EventDetail from './pages/eventDetail'
+import AddEvent from './pages/addEvent'
+import Payment from './pages/paymentContainer'
+import MyTicket from './pages/myTicketContainer'
+import Profile from './pages/profile'
 
 class App extends Component{ 
   render(){
     return (
       <div>
+
         <Router>
+          <Header />
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/category/:id/events" component={CategoryContainer} />
             <Route exact path="/event/:id" component={EventDetail} />
-            <Route exact path="/sign-in" component={SignIn} />
-            <Route exact path="/sign-up" component={SignUp} />
             <Route exact path="/add-event" component={AddEvent} />
             <Route exact path="/payment" component={Payment} />
             <Route exact path="/my-ticket" component={MyTicket} />
             <Route exact path="/profile" component={Profile} />
           </Switch>
+          <Footer />
         </Router>
       </div>
     );

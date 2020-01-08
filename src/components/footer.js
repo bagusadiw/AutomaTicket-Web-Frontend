@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import Img from 'react-image';
 import Container from '@material-ui/core/Container';
 
-import logo from '../../img/ticket.png'
+import logo from '../img/ticket.png'
 
 const useStyles = makeStyles(theme => ({
 	fC1:{
@@ -57,7 +57,7 @@ const useStyles = makeStyles(theme => ({
 const Footer = () =>{
 	const classes = useStyles();
 	return(
-		<Grid style={{backgroundColor:'#07d9c4', marginTop:'48px'}}>
+		<Grid style={{backgroundColor:'#07d9c4'}}>
 			<Container maxWidth='md' style={{display:'flex', flexDirection:'column'}}>	
 				<Grid className={classes.fC3}>
 					<Grid>	
