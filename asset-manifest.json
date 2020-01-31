@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/AutomaTicket-Web-Frontend/static/css/main.9e0c16e3.chunk.css",
+    "main.js": "/AutomaTicket-Web-Frontend/static/js/main.6b41f0bc.chunk.js",
+    "main.js.map": "/AutomaTicket-Web-Frontend/static/js/main.6b41f0bc.chunk.js.map",
+    "runtime-main.js": "/AutomaTicket-Web-Frontend/static/js/runtime-main.0f50820b.js",
+    "runtime-main.js.map": "/AutomaTicket-Web-Frontend/static/js/runtime-main.0f50820b.js.map",
+    "static/js/2.5f8489ee.chunk.js": "/AutomaTicket-Web-Frontend/static/js/2.5f8489ee.chunk.js",
+    "static/js/2.5f8489ee.chunk.js.map": "/AutomaTicket-Web-Frontend/static/js/2.5f8489ee.chunk.js.map",
+    "index.html": "/AutomaTicket-Web-Frontend/index.html",
+    "precache-manifest.f01ad7a17860d953d995af7160e508c4.js": "/AutomaTicket-Web-Frontend/precache-manifest.f01ad7a17860d953d995af7160e508c4.js",
+    "service-worker.js": "/AutomaTicket-Web-Frontend/service-worker.js",
+    "static/css/main.9e0c16e3.chunk.css.map": "/AutomaTicket-Web-Frontend/static/css/main.9e0c16e3.chunk.css.map",
+    "static/js/2.5f8489ee.chunk.js.LICENSE": "/AutomaTicket-Web-Frontend/static/js/2.5f8489ee.chunk.js.LICENSE"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0f50820b.js",
+    "static/js/2.5f8489ee.chunk.js",
+    "static/css/main.9e0c16e3.chunk.css",
+    "static/js/main.6b41f0bc.chunk.js"
+  ]
+}
