@@ -19,7 +19,7 @@ class App extends Component{
   render(){
     return (
       <div>
-        <Router basename="/">
+        <Router basename="https://bagusadiw.github.io/AutomaTicket-Web-Frontend">
           <Header />
           <Switch>
             <Route exact path="/" component={Home} />
