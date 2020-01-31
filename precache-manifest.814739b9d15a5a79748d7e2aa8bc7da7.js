@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "9c73e7b3c3ed3db0256e9166a14cf162",
+    "revision": "312d146277c59978395d69ac0742a481",
     "url": "/AutomaTicket-Web-Frontend/index.html"
   },
   {
-    "revision": "53093e44149ed161e412",
+    "revision": "c22bac3dc20e4e76d419",
     "url": "/AutomaTicket-Web-Frontend/static/css/main.9e0c16e3.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/AutomaTicket-Web-Frontend/static/js/2.5f8489ee.chunk.js.LICENSE"
   },
   {
-    "revision": "53093e44149ed161e412",
-    "url": "/AutomaTicket-Web-Frontend/static/js/main.06c50c7f.chunk.js"
+    "revision": "c22bac3dc20e4e76d419",
+    "url": "/AutomaTicket-Web-Frontend/static/js/main.ef8bffe4.chunk.js"
   },
   {
     "revision": "785b4811d3273e3bc7ca",

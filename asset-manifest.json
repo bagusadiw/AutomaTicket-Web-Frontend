@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/AutomaTicket-Web-Frontend/static/css/main.9e0c16e3.chunk.css",
-    "main.js": "/AutomaTicket-Web-Frontend/static/js/main.06c50c7f.chunk.js",
-    "main.js.map": "/AutomaTicket-Web-Frontend/static/js/main.06c50c7f.chunk.js.map",
+    "main.js": "/AutomaTicket-Web-Frontend/static/js/main.ef8bffe4.chunk.js",
+    "main.js.map": "/AutomaTicket-Web-Frontend/static/js/main.ef8bffe4.chunk.js.map",
     "runtime-main.js": "/AutomaTicket-Web-Frontend/static/js/runtime-main.0f50820b.js",
     "runtime-main.js.map": "/AutomaTicket-Web-Frontend/static/js/runtime-main.0f50820b.js.map",
     "static/js/2.5f8489ee.chunk.js": "/AutomaTicket-Web-Frontend/static/js/2.5f8489ee.chunk.js",
     "static/js/2.5f8489ee.chunk.js.map": "/AutomaTicket-Web-Frontend/static/js/2.5f8489ee.chunk.js.map",
     "index.html": "/AutomaTicket-Web-Frontend/index.html",
-    "precache-manifest.99f38aa3e0f01f27eb951048c2468a9c.js": "/AutomaTicket-Web-Frontend/precache-manifest.99f38aa3e0f01f27eb951048c2468a9c.js",
+    "precache-manifest.814739b9d15a5a79748d7e2aa8bc7da7.js": "/AutomaTicket-Web-Frontend/precache-manifest.814739b9d15a5a79748d7e2aa8bc7da7.js",
     "service-worker.js": "/AutomaTicket-Web-Frontend/service-worker.js",
     "static/css/main.9e0c16e3.chunk.css.map": "/AutomaTicket-Web-Frontend/static/css/main.9e0c16e3.chunk.css.map",
     "static/js/2.5f8489ee.chunk.js.LICENSE": "/AutomaTicket-Web-Frontend/static/js/2.5f8489ee.chunk.js.LICENSE"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.0f50820b.js",
     "static/js/2.5f8489ee.chunk.js",
     "static/css/main.9e0c16e3.chunk.css",
-    "static/js/main.06c50c7f.chunk.js"
+    "static/js/main.ef8bffe4.chunk.js"
   ]
 }
