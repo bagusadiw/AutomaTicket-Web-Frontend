@@ -19,7 +19,7 @@ class App extends Component{
   render(){
     return (
       <div>
-        <Router>
+        <Router basename="/">
           <Header />
           <Switch>
             <Route exact path="/" component={Home} />
