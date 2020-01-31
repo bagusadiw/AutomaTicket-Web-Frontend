@@ -57,7 +57,7 @@ class SignUp extends Component {
   };
 
   handleSubmit = () => {
-    axios.post('http://localhost:5000/api/v1/register', {
+    axios.post('https://dumbtick-api.herokuapp.com/api/v1/register', {
         name: this.state.name,
         email: this.state.email,
         phone: this.state.phone,

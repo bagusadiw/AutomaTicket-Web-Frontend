@@ -50,7 +50,7 @@ class Profile extends Component {
     const { name, email, phone, password, image } = this.state.user;
     axios
       .put(
-        `http://localhost:5000/api/v1/user/${id}`,
+        `https://dumbtick-api.herokuapp.com/api/v1/user/${id}`,
         {
           name: name,
           email: email,
@@ -73,7 +73,7 @@ class Profile extends Component {
   componentDidMount() {
     const id = localStorage.getItem("id");
     axios
-      .get(`http://localhost:5000/api/v1//user/${id}/favorites`, {
+      .get(`https://dumbtick-api.herokuapp.com/api/v1/user/${id}/favorites`, {
         headers: { authorization: "Bearer " + localStorage.getItem("token") }
       })
       .then(res => {
@@ -86,7 +86,7 @@ class Profile extends Component {
       });
 
     axios
-      .get(`http://localhost:5000/api/v1/user/${id}`, {
+      .get(`https://dumbtick-api.herokuapp.com/api/v1/user/${id}`, {
         headers: { authorization: "Bearer " + localStorage.getItem("token") }
       })
       .then(res => {

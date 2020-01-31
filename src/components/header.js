@@ -12,6 +12,11 @@ import SignIn from './signIn';
 import Dropdown from './dropdown';
 
 const useStyles = (theme => ({
+  body:{
+    backgroundColor:'#4267b2',
+    marginBottom: 30,
+  },
+
   container: {
     display:'flex', 
     flexDirection:'column'
@@ -24,7 +29,7 @@ const useStyles = (theme => ({
     alignItems: 'center',
     width: '100%',
     margin: '0px auto 0px auto',
-    backgroundColor:'#07d9c4'
+    backgroundColor:'#4267b2'
   },
 
   buttonContainer:{
@@ -39,8 +44,9 @@ const useStyles = (theme => ({
   dropdown:{
     display: 'flex',
     flexDirection: 'row',
-    '& h1':{
-      color: 'yellow',
+    alignItems: 'center',
+    '& h2':{
+      color: 'orange',
       margin: '0 0',
     }
   },
@@ -52,9 +58,14 @@ const useStyles = (theme => ({
     flexDirection: 'row',
     textDecoration: 'none', 
     color:'black',
+  },
+
+  headerTitle:{
+    display:'flex', 
+    flexDirection:'row', 
+    alignItems:'center',
     '& h2':{
       color: 'white',
-      fontSize: '30px',
       margin: '5px 0px'
     }
   }
@@ -65,17 +76,13 @@ class Header extends Component {
   render(){
     const { classes } = this.props;
     const isLogged = localStorage.getItem("isLogged");
-    var menuHeader;
+    let menuHeader;
     
     if(isLogged){
       menuHeader = 
-        <Grid container spacing={1} className={classes.dropdown}>
-          <Grid item style={{alignSelf:'center'}}>
-            <h1>{localStorage.getItem("username")}</h1>
-          </Grid>
-          <Grid item>
-            <Dropdown />
-          </Grid>
+        <Grid className={classes.dropdown}>
+          <h2 style={{marginRight: 10}}>{localStorage.getItem("username")}</h2>
+          <Dropdown />
         </Grid>;
     }else{
       menuHeader = 
@@ -84,6 +91,7 @@ class Header extends Component {
             <ModalSign 
               buttonText="Register"
               Component={<SignUp />}
+              title="INI MODAL REGISTER"
             />
           </Grid>
           <Grid>
@@ -95,14 +103,14 @@ class Header extends Component {
         </Grid>;
     }
     return (
-      <Grid style={{backgroundColor:'#07d9c4'}}>
+      <Grid className={classes.body}>
         <Container maxWidth='md' className={classes.container}>
           <Grid className={classes.toolBar}>
             <Link className={classes.link} to="/">
               <Grid>
-                <Img width="80" height="80" src={logo} />
+                <Img width="60" height="60" src={logo} />
               </Grid>
-              <Grid style={{display:'flex', flexDirection:'row', alignItems:'center'}}>
+              <Grid className={classes.headerTitle}>
                 <h2>AutomaTicket</h2>
               </Grid>
             </Link>

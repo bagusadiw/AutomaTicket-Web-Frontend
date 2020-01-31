@@ -5,6 +5,9 @@ import {withStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import moment from 'moment'
 
+import { connect } from 'react-redux';
+import { getEventsByCategory } from "../redux/category/category.action";
+
 import {Search} from '../components/search';
 import {EventCard} from '../components/eventCard';
 
@@ -31,19 +34,20 @@ class CategoryContainer extends Component {
 
   componentDidMount(){
     const idCategory = this.props.match.params.id;
-    axios.get(`http://localhost:5000/api/v1/category/${idCategory}/events`)
-		.then(res => {
-			this.setState({
-				events: res.data
-			})
-		})
-		.catch(err => 
-			alert(err)
-		);
+    this.props.dispatch(getEventsByCategory(idCategory));
+  //   axios.get(`https://dumbtick-api.herokuapp.com/api/v1/category/${idCategory}/events`)
+		// .then(res => {
+		// 	this.setState({
+		// 		events: res.data
+		// 	})
+		// })
+		// .catch(err => 
+		// 	alert(err)
+		// );
   }
 
   render(){
-    const events = this.state.events;
+    const events = this.props.events;
     const classes = this.props.classes;
     const search = this.state.search;
 
@@ -53,40 +57,42 @@ class CategoryContainer extends Component {
 		});
 
     return (
-    	<Grid>
-    		<Container maxWidth='md' style={{display:'flex', flexDirection:'column'}}>
-    			<Search 
-	      		placeHolder="Search by Date"
-	      		name="search"
-	      		handleChange={this.handleChange}
-	      		type="date"
-	      	/>
-	      	<Grid>
-			      <Grid className={classes.eventContainer1}>
-				      <Grid className={classes.eventContainer2}>
-					  		<Grid>
-					  			<h1 style={{color: 'orange'}}>EVENTS BY CATEGORY</h1>
-					  		</Grid>
-					  		<Grid container className={classes.eventContainer3} spacing={2}>
-				      		{filteredEvents.sort(function(a,b) {return new Date(a.startTime) - new Date(b.startTime)}).map((item, index)=>
-				      			<EventCard
-				      				key={index}
-				      				id={item.id}
-				      				title={item.title}
-				      				start={item.startTime}
-				      				img={item.img}
-				      				price={item.price}
-				      				desc={item.description}
-				      			/>
-				      		)}
-				      	</Grid>
-				      </Grid>
-				    </Grid>
+  		<Container maxWidth='md' style={{display:'flex', flexDirection:'column'}}>
+  			<Search 
+      		placeHolder="Search by Date"
+      		name="search"
+      		handleChange={this.handleChange}
+      		type="date"
+      	/>
+      	<Grid>
+		      <Grid className={classes.eventContainer1}>
+			      <Grid className={classes.eventContainer2}>
+				  		<Grid>
+				  			<h1 style={{color: 'orange'}}>EVENTS BY CATEGORY</h1>
+				  		</Grid>
+				  		<Grid container className={classes.eventContainer3} spacing={2}>
+			      		{filteredEvents.sort(function(a,b) {return new Date(a.startTime) - new Date(b.startTime)}).map((item, index)=>
+			      			<EventCard
+			      				key={index}
+			      				id={item.id}
+			      				title={item.title}
+			      				start={item.startTime}
+			      				img={item.img}
+			      				price={item.price}
+			      				desc={item.description}
+			      			/>
+			      		)}
+			      	</Grid>
+			      </Grid>
 			    </Grid>
-	      </Container>
-	    </Grid>
+		    </Grid>
+      </Container>
     );
   }
 }
 
-export default withStyles(useStyles)(CategoryContainer);
+const mapStatetoProps = state => ({
+	events: state.categoryReducer.eventsByCategory
+})
+
+export default connect(mapStatetoProps)(withStyles(useStyles)(CategoryContainer));

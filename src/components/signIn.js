@@ -32,7 +32,7 @@ const useStyles = (theme => ({
   },
 }));
 
-class SignUp extends Component {
+class SignIn extends Component {
   constructor() {
     super();
     this.state = {
@@ -46,7 +46,7 @@ class SignUp extends Component {
   };
 
   handleSubmit = () => {
-    axios.post('http://localhost:5000/api/v1/login', {
+    axios.post('https://dumbtick-api.herokuapp.com/api/v1/login', {
         username: this.state.username,
         password: this.state.password
     })
@@ -115,4 +115,4 @@ class SignUp extends Component {
   }
 }
 
-export default withStyles(useStyles)(SignUp);
+export default withStyles(useStyles)(SignIn);

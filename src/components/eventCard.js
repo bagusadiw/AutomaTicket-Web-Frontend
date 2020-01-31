@@ -13,7 +13,19 @@ import NumberFormat from 'react-number-format';
 import axios from 'axios';
 
 const useStyles = makeStyles(theme => ({
+  eventCard:{
+    display: 'inline-block',
+    '&:hover': {
+      '& Img':{
+        transition: 'all 10s ease-in-out 0s',
+        transform: 'scale(1.1)',
+        opacity: 0.7,
+      }
+    }
+  },
+
   contentCard:{
+    overflow: 'hidden',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-start',
@@ -51,14 +63,6 @@ const useStyles = makeStyles(theme => ({
   },
 
   imageContentCard: {
-    // flex: '0 1 auto',
-    // position: 'relative',
-    // width:'305px',
-    // maxWidth: '100%',
-    // height: '150px',
-    // backgroundOrigin: 'border-box!important',
-    // backgroundSize: 'cover!important',
-    // display: 'block!important',
     width: '100%',
     height: '150px'
   },
@@ -85,12 +89,6 @@ const useStyles = makeStyles(theme => ({
     }
   },
 
-  eventCard:{
-    '&:hover': {
-      transform: 'scale(1.02)'
-    }
-  },
-
   price:{
     width:'auto', 
     height:'auto', 
@@ -103,12 +101,12 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export const EventCard = (props) => {
-    const [favorited, setFavorited] = useState({ favorited: false });
+    const [favorited, setFavorited] = useState({ favorited: true });
     const classes = useStyles();
 
     useEffect(() => {
         axios.post(
-          'http://localhost:5000/api/v1/favorites/show', {
+          'https://dumbtick-api.herokuapp.com/api/v1/favorites/show', {
           idUser: localStorage.getItem("id"),
           idEvent: props.id
         })
@@ -123,7 +121,7 @@ export const EventCard = (props) => {
     const handleFavorite = () =>{
       if (favorited){
         axios.post(
-          'http://localhost:5000/api/v1/favorites/delete', {
+          'https://dumbtick-api.herokuapp.com/api/v1/favorites/delete', {
           idUser: localStorage.getItem("id"),
           idEvent: props.id
         }, {
@@ -139,7 +137,7 @@ export const EventCard = (props) => {
         });
       }else{
         axios.post(
-          'http://localhost:5000/api/v1/favorites/store', {
+          'https://dumbtick-api.herokuapp.com/api/v1/favorites/store', {
           idUser: localStorage.getItem("id"),
           idEvent: props.id
         }, {
@@ -160,7 +158,7 @@ export const EventCard = (props) => {
     if(favorited){
       favoritesIcon =
         <Grid>
-          <FavoriteIcon onClick={handleFavorite} className={classes.buttonFavorites}/>
+          <FavoriteIcon color="primary" onClick={handleFavorite} className={classes.buttonFavorites}/>
         </Grid> 
     }else{
       favoritesIcon =
@@ -179,20 +177,20 @@ export const EventCard = (props) => {
             <Grid style={{padding:'10px 10px 0 0', position: 'absolute', alignSelf:'flex-end'}}>
               { props.price ? 
               (
-              <Paper className={classes.price}>
+              <Grid className={classes.price}>
                 <NumberFormat 
                   value={props.price} 
                   displayType={'text'} 
                   thousandSeparator={true} prefix={'Rp.'} 
                   renderText={value => <Grid>{value}</Grid>} 
                 />
-              </Paper>
+              </Grid>
               )
               :
               (
-              <Paper className={classes.price}>
+              <Grid className={classes.price}>
                 Free
-              </Paper>
+              </Grid>
               )
               }
             </Grid>

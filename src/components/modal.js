@@ -37,7 +37,7 @@ const useStyles = makeStyles(theme=>({
 }))
 
 
-const ModalSign = ({buttonText, Component}) => {
+const ModalSign = (props) => {
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => {
@@ -51,7 +51,7 @@ const ModalSign = ({buttonText, Component}) => {
   return (
     <div>
       <Button className={classes.buttonSign} onClick={handleOpen}>
-        <h2>{buttonText}</h2>
+        <h2>{props.buttonText}</h2>
       </Button>
       <Modal
         aria-labelledby="transition-modal-title"
@@ -67,7 +67,7 @@ const ModalSign = ({buttonText, Component}) => {
       >
         <Fade in={open}>
           <Grid className={classes.modalContent}>
-            {Component}
+            {props.Component}
           </Grid>
         </Fade>
       </Modal>

@@ -19,98 +19,56 @@ const useStyles = makeStyles(theme => ({
     marginTop:'40px'
   },
 
-  imgContainer:{
-    display: 'block',
-  },
-
-  img:{
-    display: 'block',
-    paddingBottom: '16px',
-  },
-
-  boxTypograhpy1:{
+  bT1:{
     display: 'block',
     width:'100%',
     marginBottom: '30px'
   },
 
-  typography1:{
+  t1:{
     lineHeight: '32px',
-    fontSize:'50px',
     fontWeight: '900',
-    color: '#FF5555',
+    color: '#4267b2',
     margin: '0',
   },
 
-  boxTypography2:{
-    marginTop: '8px',
-    display: 'block',
-    maxWidth: '360px',
-  },
-
-  typography2:{
-    color: 'grey',
-    fontSize: '12pt',
-    lineHeight: '20px',
-    fontWeight: '300',
-    margin: '0',
-    fontFamily: 'Bell MT',
-  },
-
-  boxTypography3:{
-    marginBottom: '28px',
-    marginTop: '28px',
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems:'center',
-    justifyContent: 'center',
-  },
-
-  typography3:{
-    color: 'black',
-    fonthSize: '14pt',
-    lineeight: '24px',
-    fontWeight: 'bold',
-    fontFamily: 'Bell MT',
-    margin: '0',
-  },
-
-  textFieldContainerLogin:{
+  tFCL:{
     marginTop: '18px',
     display: 'block',
   },
 
-  textFieldContainer2:{
+  tFC1:{
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center'
   },
 
-  textFieldContainer3:{
+  tFC2:{
     width: '100%',
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
   },
   
-  textFieldContainer4:{
+  tFC3:{
+    textAlign:'center',
+    backgroundColor: '#4267b2',
+    padding: '10px 0px',
+    '& h2':{
+      margin: '0px 0px',
+      color: 'white'
+    }
+  },
+
+  tFC4:{
   	width: '100%',
   	minHeight: '150px',
-    borderTop: '10px solid red',
+    borderTop: '10px solid #4267b2',
     backgroundColor: 'white',
     alignContent:'center'
   },
 
-  textFieldContainer5:{
-  	textAlign:'center',
-  	backgroundColor: '#FF5555',
-  	padding: '10px 0px',
-  	'& p':{
-  		fontSize:'35px',
-  		margin: '0px 0px',
-  		color: 'white'
-  	}
-  },
+  
 
   
 }));
@@ -122,7 +80,7 @@ const PaymentContainer = (props) => {
 
   useEffect(() => {
   	const idUser = localStorage.getItem('id');
-    axios.get(`http://localhost:5000/api/v1/user/${idUser}/orders`, 
+    axios.get(`https://dumbtick-api.herokuapp.com/api/v1/user/${idUser}/orders`, 
     {
     	headers:{
         authorization: "Bearer "+localStorage.getItem("token")
@@ -138,46 +96,44 @@ const PaymentContainer = (props) => {
   }, [])
       
   return (
-    <Grid style={{backgroundColor: '#F3EDCE'}}>
-      <Container container className={classes.paper} maxWidth="md">
-  
-        <Grid className={classes.textFieldContainerLogin}>
-          <Grid className={classes.textFieldContainer2}>
-            <Grid className={classes.boxTypograhpy1}>
-              <Typography className={classes.typography1} component="h1" variant="h4">
-                Payment
-              </Typography>
-            </Grid>
-						
-						<Grid container className={classes.textFieldContainer3}>
-							<Grid item md={6} className={classes.textFieldContainer5}>
-								<p>Payment</p>
-							</Grid>
-						</Grid>
+    <Container container className={classes.paper} maxWidth="md">
 
-						<Grid className={classes.textFieldContainer4}>							
-						{Array.isArray(orders) && orders.map((item, index)=>
-							<PaymentFeed 
-								key={index}
-								idOrder={item.id}
-								userName={item.orderedByUser.name}
-								idUser={item.orderedByUser.id}
-								price={item.orderedEvent.price}
-								title={item.orderedEvent.title}
-								startTime={item.orderedEvent.startTime}
-								address={item.orderedEvent.address}
-								quantity={item.quantity}
-								totalPrice={item.totalPrice}
-								status={item.status}
-							/>
-							)
-						}	
-						</Grid>
+      <Grid className={classes.tFCL}>
+        <Grid className={classes.tFC1}>
+          <Grid className={classes.bT1}>
+            <h1 className={classes.t1}>
+              Payment
+            </h1>
           </Grid>
+					
+					<Grid container className={classes.tFC2}>
+						<Grid item md={6} className={classes.tFC3}>
+							<h2>Payment</h2>
+						</Grid>
+					</Grid>
+
+					<Grid className={classes.tFC4}>							
+					{Array.isArray(orders) && orders.map((item, index)=>
+						<PaymentFeed 
+							key={index}
+							idOrder={item.id}
+							userName={item.orderedByUser.name}
+							idUser={item.orderedByUser.id}
+							price={item.orderedEvent.price}
+							title={item.orderedEvent.title}
+							startTime={item.orderedEvent.startTime}
+							address={item.orderedEvent.address}
+							quantity={item.quantity}
+							totalPrice={item.totalPrice}
+							status={item.status}
+						/>
+						)
+					}	
+					</Grid>
         </Grid>
-      
-      </Container>
-    </Grid>
+      </Grid>
+    
+    </Container>
   );
 }
 

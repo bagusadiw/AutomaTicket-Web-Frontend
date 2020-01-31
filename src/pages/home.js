@@ -60,7 +60,7 @@ class Home extends Component {
 				this.setState({
 					searchMode: true
 				});
-				axios.get(`http://localhost:5000/api/v1/events?title=${this.state.search}`)
+				axios.get(`https://dumbtick-api.herokuapp.com/api/v1/events?title=${this.state.search}`)
 				.then(res => {
 					this.setState({
 						searchResult: res.data.events,
@@ -70,15 +70,6 @@ class Home extends Component {
 			}else{
 				alert("Search field must be filled!!!")
 			}
-		}
-
-		if(event.keyCode === 27){
-			this.setState({
-				search: '',
-				searchMode: false,
-				notFound: false,
-				searchResult: []
-			})	
 		}
 	}
 
@@ -92,15 +83,15 @@ class Home extends Component {
 	}
 
 	componentDidMount(){
-		var today = new Date();
-		var tomorrow1 = new Date();
+		let today = new Date();
+		let tomorrow1 = new Date();
 		tomorrow1.setDate(tomorrow1.getDate() + 1);
-		var tomorrow2 = new Date();
+		let tomorrow2 = new Date();
 		tomorrow2.setDate(tomorrow2.getDate() + 8);
 
-		var today = moment(today).format("YYYY-MM-DD")
-		var tomorrow1 = moment(tomorrow1).format("YYYY-MM-DD")
-		var tomorrow2 = moment(tomorrow2).format("YYYY-MM-DD")
+		today = moment(today).format("YYYY-MM-DD")
+		tomorrow1 = moment(tomorrow1).format("YYYY-MM-DD")
+		tomorrow2 = moment(tomorrow2).format("YYYY-MM-DD")
 
 		this.props.dispatch(getTodayEventsFeed(today, tomorrow1));
 		this.props.dispatch(getUpcomingEventsFeed(tomorrow1, tomorrow2));
@@ -108,163 +99,136 @@ class Home extends Component {
 	}
 
 	render(){
-		const classes = this.props.classes
-		const isLoadingEvents = this.props.isLoadingEvents
-		const isErrorEvents = this.props.isErrorEvents
-		const isLoadingCategories = this.props.isLoadingCategories
-		const isErrorCategories = this.props.isErrorCategories
-
-		// // TODAY EVENTS FEED 
-		// const todayEvents = this.props.eventsFeed.filter(item => {
-		//   const date = new Date(item.startTime);
-		//   const today = new Date();
-		//   return (moment(date).format("DD MM YYYY") === moment(today).format("DD MM YYYY"));
-		// });
-
-		//  // UPCOMING EVENTS FEED 
-		// const upcomingEvents = this.props.eventsFeed.filter(item => {
-		//   const date = new Date(item.startTime);
-		//   var tomorrow = new Date();
-		// 	tomorrow.setDate(tomorrow.getDate() + 1);
-			
-		//   return (date.toString().substring(0,10) === tomorrow.toString().substring(0,10));
-		// });
+		const classes = this.props.classes;
+		const {
+			todayEventsFeed, 
+			upcomingEventsFeed,
+			isLoadingEvents,
+			isErrorEvents
+		} = this.props.homeRedux;
+		const {
+			categoryList,
+			isLoadingCategories,
+			isErrorCategories
+		} = this.props.categoryRedux;
 
 	  return (
-	    <Grid style={{backgroundColor: '#F3EDCE', paddingBottom:'48px'}}>
-	      <Container maxWidth='md' style={{display:'flex', flexDirection:'column'}}>
-	      	{ isLoadingCategories ?
-			    	(
-              <Grid className={classes.loadingChild}>
-                <Skeleton variant="text" width="100%" />
-                <Skeleton variant="text" width="100%" />
-                <Skeleton variant="text" width="100%" />
-              </Grid>
-            )
-            :
-            isErrorCategories ?
-            (
-            <Grid style={{justifyContent:'center', display:'flex'}}>
-            	<Grid>
-            		<h3>Fetching Category List Failed</h3>
-            	</Grid>
+      <Container maxWidth='md' style={{display:'flex', flexDirection:'column'}}>
+      	{ isLoadingCategories ?
+		    	(
+            <Grid className={classes.loadingChild}>
+              <Skeleton variant="text" width="100%" />
+              <Skeleton variant="text" width="100%" />
+              <Skeleton variant="text" width="100%" />
             </Grid>
-            )
-            :
-            (
-				    <Grid>
-				  		<Grid>
-				  			<h1 style={{color: '#FF5555'}}>CATEGORY</h1>
-				  		</Grid>
-				  		<Grid container spacing={3}>
-			      		{this.props.categoryList.map((item, index)=>
-			      			<CategoryList
-			      				key={index} 
-			      				id={item.id}
-			      				name={item.name}
-			      				urlImage={item.urlImage}
-			      			/>
-			      		)}
-			      	</Grid>
-				    </Grid>
-				    )
-				  }
-	      	{/* SEARCH */}
-	      	<Search 
-	      		placeHolder="Search Event"
-	      		name="search"
-	      		value={this.state.search}
-	      		handleChange={this.handleChange}
-	      		handleSearch={this.handleSearch}
-	      		handleClear={this.handleClear}
-	      		searchMode={this.state.searchMode}
-	      	/>
-	      	
-	      	{this.state.searchMode ?
-			      ( 
-				      <Grid>
-				      	<Grid>
-					  			<h1 style={{color: 'blue'}}>SEARCH RESULT</h1>
-					  		</Grid>
-					  		{this.state.notFound ?
-					  			(
-						  		<Grid style={{display:'flex', justifyContent:'center'}}>
-				      			<h2>Data not found</h2>
-				      		</Grid>
-				      		)
-				      		:
-				      		(
-				      		<Grid container spacing={3}>
-					      		{this.state.searchResult.sort(function(a,b) {return new Date(a.startTime) - new Date(b.startTime)}).map((item, index)=>			      			
-					      			<EventCard
-					      				key={index}
-					      				id={item.id}
-					      				title={item.title}
-					      				start={item.startTime}
-					      				img={item.img}
-					      				price={item.price}
-					      				desc={item.description}
-					      			/>
-					      		)}
-					      	</Grid>
-				      		)
-				      	}
-				      </Grid>
-			      )
-			      :
-			      ( 
+          )
+          :
+          isErrorCategories ?
+          (
+          <Grid style={{justifyContent:'center', display:'flex'}}>
+          	<Grid>
+          		<h3>Fetching Category List Failed</h3>
+          	</Grid>
+          </Grid>
+          )
+          :
+          (
+			    <Grid>
+			  		<Grid>
+			  			<h2 style={{color: '#4267b2'}}>CATEGORY</h2>
+			  		</Grid>
+			  		<Grid container spacing={3}>
+		      		{categoryList.map((item, index)=>
+		      			<CategoryList
+		      				key={index} 
+		      				id={item.id}
+		      				name={item.name}
+		      				urlImage={item.urlImage}
+		      			/>
+		      		)}
+		      	</Grid>
+			    </Grid>
+			    )
+			  }
+			  
+      	{/* SEARCH */}
+      	<Search 
+      		placeHolder="Search Event"
+      		name="search"
+      		value={this.state.search}
+      		handleChange={this.handleChange}
+      		handleSearch={this.handleSearch}
+      		handleClear={this.handleClear}
+      		searchMode={this.state.searchMode}
+      	/>
+      	
+      	{this.state.searchMode ?
+		      ( 
+			      <Grid>
 			      	<Grid>
-					    { isLoadingEvents ?
-					    	(
-		            <Grid className={classes.loadingChild}>
-		              <Grid>
-		                <Skeleton variant="text" />
-		                <Skeleton variant="circle" width={40} height={40} />
-		                <Skeleton variant="rect" width="100%" height={118} />
-		              </Grid>
-		              <Grid>
-		                <Skeleton variant="text" />
-		                <Skeleton variant="circle" width={40} height={40} />
-		                <Skeleton variant="rect" width="100%" height={118} />
-		              </Grid>
-		            </Grid>
-					    	)
-					    	:
-					    	isErrorEvents ?
-					    	(
-								<Grid style={{justifyContent:'center', display:'flex'}}>			    		
-					    		<Grid>
-					    			<h3>Fetching Events Failed</h3>
-					    		</Grid>
-					    	</Grid>
-					      )
-					      :
-					      (
-					      <Grid>
-						      <Grid style={{marginBottom: '60px'}}>
-							  		<Grid>
-							  			<h1 style={{color: '#FF5555'}}>TODAY</h1>
-							  		</Grid>
-							  		<Grid container spacing={3}>
-						      		{this.props.todayEvents.sort(function(a,b) {return new Date(a.startTime) - new Date(b.startTime)}).map((item, index)=>
-						      			<EventCard
-						      				key={index}
-						      				id={item.id}
-						      				title={item.title}
-						      				start={item.startTime}
-						      				img={item.img}
-						      				price={item.price}
-						      				desc={item.description}
-						      			/>
-						      		)}
-						      	</Grid>
-						      </Grid>
-
+				  			<h2 style={{color: '#4267b2'}}>SEARCH RESULT</h2>
+				  		</Grid>
+				  		{this.state.notFound ?
+				  			(
+					  		<Grid style={{display:'flex', justifyContent:'center'}}>
+			      			<h2>Data not found</h2>
+			      		</Grid>
+			      		)
+			      		:
+			      		(
+			      		<Grid container spacing={3}>
+				      		{this.state.searchResult.sort(function(a,b) {return new Date(a.startTime) - new Date(b.startTime)}).map((item, index)=>			      			
+				      			<EventCard
+				      				key={index}
+				      				id={item.id}
+				      				title={item.title}
+				      				start={item.startTime}
+				      				img={item.img}
+				      				price={item.price}
+				      				desc={item.description}
+				      			/>
+				      		)}
+				      	</Grid>
+			      		)
+			      	}
+			      </Grid>
+		      )
+		      :
+		      ( 
+		      	<Grid>
+				    { isLoadingEvents ?
+				    	(
+	            <Grid className={classes.loadingChild}>
+	              <Grid>
+	                <Skeleton variant="text" />
+	                <Skeleton variant="circle" width={40} height={40} />
+	                <Skeleton variant="rect" width="100%" height={118} />
+	              </Grid>
+	              <Grid>
+	                <Skeleton variant="text" />
+	                <Skeleton variant="circle" width={40} height={40} />
+	                <Skeleton variant="rect" width="100%" height={118} />
+	              </Grid>
+	            </Grid>
+				    	)
+				    	:
+				    	isErrorEvents ?
+				    	(
+							<Grid style={{justifyContent:'center', display:'flex'}}>			    		
+				    		<Grid>
+				    			<h3>Fetching Events Failed</h3>
+				    		</Grid>
+				    	</Grid>
+				      )
+				      :
+				      (
+				      <Grid>
+					      <Grid style={{marginBottom: '30px'}}>
 						  		<Grid>
-						  			<h1 style={{color: 'green'}}>UPCOMING EVENTS</h1>
+						  			<h2 style={{color: '#4267b2'}}>TODAY</h2>
 						  		</Grid>
 						  		<Grid container spacing={3}>
-					      		{this.props.upcomingEvents.sort(function(a,b) {return new Date(a.startTime) - new Date(b.startTime)}).map((item, index)=>			      			
+					      		{todayEventsFeed.sort(function(a,b) {return new Date(a.startTime) - new Date(b.startTime)}).map((item, index)=>
 					      			<EventCard
 					      				key={index}
 					      				id={item.id}
@@ -277,25 +241,39 @@ class Home extends Component {
 					      		)}
 					      	</Grid>
 					      </Grid>
-					      )
-				    	}
-				    	</Grid>
-			    	)
-			    }
-	    	</Container>
-	    </Grid>
+
+					      <Grid style={{marginBottom: '30px'}}>
+						  		<Grid>
+						  			<h2 style={{color: '#4267b2'}}>UPCOMING EVENTS</h2>
+						  		</Grid>
+						  		<Grid container spacing={3}>
+					      		{upcomingEventsFeed.sort(function(a,b) {return new Date(a.startTime) - new Date(b.startTime)}).map((item, index)=>			      			
+					      			<EventCard
+					      				key={index}
+					      				id={item.id}
+					      				title={item.title}
+					      				start={item.startTime}
+					      				img={item.img}
+					      				price={item.price}
+					      				desc={item.description}
+					      			/>
+					      		)}
+					      	</Grid>
+					      </Grid>
+				      </Grid>
+				      )
+			    	}
+			    	</Grid>
+		    	)
+		    }
+    	</Container>
 	  );
   }
 }
 
 const mapStatetoProps = state => ({
-	todayEvents: state.homeReducer.todayEventsFeed,
-	upcomingEvents: state.homeReducer.upcomingEventsFeed,
-	categoryList: state.categoryReducer.categoryList,
-	isLoadingEvents: state.homeReducer.isLoadingEvents,
-	isErrorEvents : state.homeReducer.isErrorEvents,
-	isLoadingCategories: state.categoryReducer.isLoadingCategories,
-	isErrorCategories: state.categoryReducer.isErrorCategories
+	homeRedux: state.homeReducer,
+	categoryRedux: state.categoryReducer
 })
 
 export default connect(mapStatetoProps)(withStyles(useStyles)(Home));

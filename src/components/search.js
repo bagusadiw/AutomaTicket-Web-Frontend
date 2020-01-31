@@ -13,17 +13,17 @@ import CancelIcon from '@material-ui/icons/Cancel';
 
 const useStyles = makeStyles(theme => ({
 	margin: {
-    margin: '50px 0 50px 0',
+    margin: '25px 0',
   },
 
   searchLabel:{
-  	fontSize: '30px',
+  	fontSize: '25px',
   	fontWeight: 800  	
   },
 
   searchInput:{
    	zIndex: 800,
-  	fontSize: '30px',
+  	fontSize: '25px',
   }
 }))
 

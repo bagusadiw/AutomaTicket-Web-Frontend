@@ -41,10 +41,6 @@ const useStyles = makeStyles(theme => ({
 		},
 	},
 
-	fC5:{
-		
-	},
-
 	fC6:{
 		display:'flex',
 		margin: "20px 0",
@@ -57,10 +53,10 @@ const useStyles = makeStyles(theme => ({
 const Footer = () =>{
 	const classes = useStyles();
 	return(
-		<Grid style={{backgroundColor:'#07d9c4'}}>
+		<Grid style={{marginTop: 30,backgroundColor:'#4267b2'}}>
 			<Container maxWidth='md' style={{display:'flex', flexDirection:'column'}}>	
 				<Grid className={classes.fC3}>
-					<Grid>	
+					
 						<Grid className={classes.fC4} container spacing={2}>
 							<Grid item xs={12} md={4}>
 								<Grid>
@@ -96,7 +92,7 @@ const Footer = () =>{
 								<Typography>Get unlimited access to the best stories on Medium — and support writers while you’re at it. Just $5/month. Upgrade</Typography>
 							</Grid>
 						</Grid>
-					</Grid>
+					
 				</Grid>
 
 				<Grid className={classes.fC6}>

@@ -20,6 +20,7 @@ const useStyles = makeStyles(theme => ({
 
   popper:{
     zIndex: 850,
+    left: 1,
   },
 
   menuItem:{
@@ -41,9 +42,16 @@ const useStyles = makeStyles(theme => ({
   	flexDirection: 'row'
   },
 
+  menuList:{
+    padding: '0 0',
+    '& p':{
+      fontSize: 15
+    }
+  },
+
   link:{
     textDecoration: 'none', 
-    color:'black'
+    color:'black',
   }
 
   // dropdownInfo:{
@@ -102,7 +110,7 @@ const Dropdown = (props) => {
 
       <div>
         <Avatar
-          style={{width: '60px', height:'60px'}}
+          style={{width: '50px', height:'50px'}}
         	ref={anchorRef} 
         	aria-controls={open ? 'menu-list-grow' : undefined} 
         	onClick={handleToggle} 
@@ -116,9 +124,9 @@ const Dropdown = (props) => {
             >
               <Paper elevation={5} className={classes.menuItem}>
                 <ClickAwayListener onClickAway={handleClose}>
-                  <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
+                  <MenuList autoFocusItem={open} id="menu-list-grow" class={classes.menuList} onKeyDown={handleListKeyDown}>
                     <Link className={classes.link} to="/profile">
-                      <MenuItem onClick={handleClose}>
+                      <MenuItem  onClick={handleClose}>
                         <p>
   	                    	Profile
                         </p>

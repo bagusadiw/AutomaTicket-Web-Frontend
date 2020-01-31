@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux';
 
-import articleReducer from './article/article.reducer';
 import homeReducer from './home/home.reducer';
 import categoryReducer from './category/category.reducer';
 

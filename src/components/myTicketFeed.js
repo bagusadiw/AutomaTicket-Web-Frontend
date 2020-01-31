@@ -8,17 +8,17 @@ import Img from 'react-image';
 import axios from 'axios'
 
 const useStyles = makeStyles(theme => ({
-	ticketContainer:{
+	tC:{
   	margin: '30px 30px',
   },
 
-  ticketImageContainer:{
-  	border:'20px solid red',
+  tIC:{
+  	border:'20px solid #4267b2',
   	backgroundColor: 'white',
   	minHeight:'100px'
   },
 
-  ticketImageHeader:{
+  tIH:{
   	display:'flex',
   	flexDirection:'row',
   	backgroundColor: 'grey',
@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
   	}
   },
 
-  ticketImageFooter:{
+  tIF:{
   	display:'flex',
   	flexDirection:'row',
   	backgroundColor: 'white',
@@ -96,12 +96,12 @@ const MyTicketFeed = (props) => {
 
    useEffect(() => {
       setStatusNow(props.status)
-  })
+  }, [props.status])
 
   const handlePress = () =>{
     const idOrder = props.idOrder;
     if(statusNow === "CONFIRM"){
-      axios.put(`http://localhost:5000/api/v1/order/${idOrder}`, {
+      axios.put(`https://dumbtick-api.herokuapp.com/api/v1/order/${idOrder}`, {
         status: "PENDING"
       }, {
         headers:{
@@ -116,7 +116,7 @@ const MyTicketFeed = (props) => {
           alert(err)
       });  
     }else if(statusNow === "PENDING"){
-      axios.put(`http://localhost:5000/api/v1/order/${idOrder}`, {
+      axios.put(`https://dumbtick-api.herokuapp.com/api/v1/order/${idOrder}`, {
         status :  "APPROVED"
       }, {
         headers:{
@@ -152,9 +152,9 @@ const MyTicketFeed = (props) => {
   }
 
 	return(
-		<Grid className={classes.ticketContainer}>
-			<Grid className={classes.ticketImageContainer}>
-				<Grid className={classes.ticketImageHeader}>
+		<Grid className={classes.tC}>
+			<Grid className={classes.tIC}>
+				<Grid className={classes.tIH}>
 					<Grid>
 						<h2>{props.userName}</h2>
 						<h3>{props.idUser}</h3>
@@ -164,7 +164,7 @@ const MyTicketFeed = (props) => {
 						<h3>-</h3>
 					</Grid>
 				</Grid>
-				<Grid className={classes.ticketImageFooter}>
+				<Grid className={classes.tIF}>
 					<Grid>
 						<h1>{props.title}</h1>
 						<p>{moment(props.startTime).format("dddd")} {moment(props.startTime).format("DD MMM YYYY")} at {moment(props.startTime).utc().format("HH:mm")}</p>

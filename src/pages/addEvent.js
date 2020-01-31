@@ -17,94 +17,34 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'center',
     minHeight: '550px',
     borderRadius: '4px',
-    marginTop:'40px'
+    marginTop:'auto'
   },
 
-  imgContainer:{
+  bT1:{
     display: 'block',
-  },
-
-  img:{
-    display: 'block',
-    paddingBottom: '16px',
-  },
-
-  signUpField :{
-    display: 'flex',
-    width: '360px',
-    height: '100%',
-    padding: '44px 56px',
-    textAlign: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'column',
-  },
-
-  boxTypograhpy1:{
-    display: 'block',
-    width:'100%',
+    width:'80%',
     marginBottom: '30px'
   },
 
-  typography1:{
+  t1:{
     lineHeight: '32px',
-    fontSize:'50px',
     fontWeight: '900',
-    color: '#FF5555',
+    color: '#4267b2',
     margin: '0',
   },
 
-  boxTypography2:{
-    marginTop: '8px',
-    display: 'block',
-    maxWidth: '360px',
-  },
-
-  typography2:{
-    color: 'grey',
-    fontSize: '12pt',
-    lineHeight: '20px',
-    fontWeight: '300',
-    margin: '0',
-    fontFamily: 'Bell MT',
-  },
-
-  boxTypography3:{
-    marginBottom: '28px',
-    marginTop: '28px',
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems:'center',
-    justifyContent: 'center',
-  },
-
-  typography3:{
-    color: 'black',
-    fonthSize: '14pt',
-    lineeight: '24px',
-    fontWeight: 'bold',
-    fontFamily: 'Bell MT',
-    margin: '0',
-  },
-
-  textFieldContainerLogin:{
-    marginTop: '28px',
+  tFCL:{
+   
     display: 'block',
   },
 
-  textFieldContainer2:{
+  tFC2:{
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center'
   },
 
-  textFieldContainer3:{
-    marginBottom: '28px',
-    marginTop: '12px',
-    display: 'block',
-  },
-
-  textFieldContainer4:{
+  tFC3:{
     width: '70%',
     padding: '5px 50px',
     display: 'flex',
@@ -114,13 +54,13 @@ const useStyles = makeStyles(theme => ({
     marginBottom: '5px',
   },
 
-  textFieldLabelContainer:{
+  tFLC:{
     marginTop: '5px',
     marginBottom: '5px',
     display: 'block',
   },
 
-  textFieldLabel:{
+  tFL:{
     color: 'black',
     fontSize: '20px',
     lineHeight: '20px',
@@ -135,7 +75,7 @@ const useStyles = makeStyles(theme => ({
     fontSize:'20px',
   },
 
-  buttonContinue:{
+  bC:{
     margin: '10px 0px',
   },
 
@@ -163,7 +103,7 @@ const AddEvent = (props) => {
 
   useEffect(() => {
     axios.get(
-      'http://localhost:5000/api/v1/categories'
+      'https://dumbtick-api.herokuapp.com/api/v1/categories'
     )
     .then(res=>{  
       setCategories(res.data)
@@ -180,7 +120,7 @@ const AddEvent = (props) => {
   };
 
   const handleSubmit = () => {
-    axios.post('http://localhost:5000/api/v1/event', {
+    axios.post('https://dumbtick-api.herokuapp.com/api/v1/event', {
       title: state.title,
       idCategory: state.idCategory,
       startTime: state.startTime,
@@ -204,126 +144,124 @@ const AddEvent = (props) => {
         alert(err)
     });
   };
-      
-  return (
-    <Grid style={{backgroundColor: '#F3EDCE'}}>
-      <Container container className={classes.paper} maxWidth="md">
   
-        <Grid className={classes.textFieldContainerLogin}>
-          <Grid className={classes.textFieldContainer2}>
-            <Grid className={classes.boxTypograhpy1}>
-              <Typography className={classes.typography1} component="h1" variant="h4">
-                Add Event
-              </Typography>
+  return (
+    <Container container className={classes.paper} maxWidth="md">
+
+      
+        <Grid className={classes.tFC2}>
+          <Grid className={classes.bT1}>
+            <h1 className={classes.t1} component="h1" variant="h4">
+              Add Event
+            </h1>
+          </Grid>
+          <Grid className={classes.tFC3}>
+            <Grid className={classes.tFLC}>
+              <Typography component="h1" className={classes.tFL}>Title Event</Typography>
             </Grid>
-            <Grid className={classes.textFieldContainer4}>
-              <Grid className={classes.textFieldLabelContainer}>
-                <Typography component="h1" className={classes.textFieldLabel}>Title Event</Typography>
-              </Grid>
-              <TextField onChange={handleInputChange} name="title" className={classes.input}></TextField>
+            <TextField onChange={handleInputChange} name="title" className={classes.input}></TextField>
+          </Grid>
+
+          <Grid className={classes.tFC3}>
+            <Grid className={classes.tFLC}>
+              <Typography component="h1" className={classes.tFL}>Category</Typography>
             </Grid>
 
-            <Grid className={classes.textFieldContainer4}>
-              <Grid className={classes.textFieldLabelContainer}>
-                <Typography component="h1" className={classes.textFieldLabel}>Category</Typography>
-              </Grid>
-
-              <TextField
-                name="idCategory"
-                select
-                className={classes.input}
-                onChange={handleInputChange}
-                SelectProps={{
-                  native: true,
-                }}
-              >
-                <option value="">
-                  --Please select category--    
+            <TextField
+              name="idCategory"
+              select
+              className={classes.input}
+              onChange={handleInputChange}
+              SelectProps={{
+                native: true,
+              }}
+            >
+              <option value="">
+                --Please select category--    
+              </option>
+              {Array.isArray(categories) && categories.map((option, index)=> (
+                <option key={index} value={option.id}>
+                  {option.name}
                 </option>
-                {Array.isArray(categories) && categories.map((option, index)=> (
-                  <option key={index} value={option.id}>
-                    {option.name}
-                  </option>
-                ))}
-              </TextField>
-            </Grid>
+              ))}
+            </TextField>
+          </Grid>
 
-            <Grid className={classes.textFieldContainer4}>
-              <Grid className={classes.textFieldLabelContainer}>
-                <Typography component="h1" className={classes.textFieldLabel}>Start Time</Typography>
-              </Grid>
-              
-              <TextField
-                type="datetime-local"
-                name="startTime"
-                onChange={handleInputChange}
-                className={classes.input}
-                InputLabelProps={{
-                  shrink: true,
-                }}
-              />
+          <Grid className={classes.tFC3}>
+            <Grid className={classes.tFLC}>
+              <Typography component="h1" className={classes.tFL}>Start Time</Typography>
             </Grid>
             
-            <Grid className={classes.textFieldContainer4}>
-              <Grid className={classes.textFieldLabelContainer}>
-                <Typography component="h1" className={classes.textFieldLabel}>End Time</Typography>
-              </Grid>
-              <TextField
-                type="datetime-local"
-                name="endTime"
-                onChange={handleInputChange}
-                className={classes.input}
-                InputLabelProps={{
-                  shrink: true,
-                }}
-              />
+            <TextField
+              type="datetime-local"
+              name="startTime"
+              onChange={handleInputChange}
+              className={classes.input}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+          </Grid>
+          
+          <Grid className={classes.tFC3}>
+            <Grid className={classes.tFLC}>
+              <Typography component="h1" className={classes.tFL}>End Time</Typography>
             </Grid>
-            
-            <Grid className={classes.textFieldContainer4}>
-              <Grid className={classes.textFieldLabelContainer}>
-                <Typography component="h1" className={classes.textFieldLabel}>Attach Image</Typography>
-              </Grid>
-              <TextField onChange={handleInputChange} name="img" className={classes.input}></TextField>
+            <TextField
+              type="datetime-local"
+              name="endTime"
+              onChange={handleInputChange}
+              className={classes.input}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+          </Grid>
+          
+          <Grid className={classes.tFC3}>
+            <Grid className={classes.tFLC}>
+              <Typography component="h1" className={classes.tFL}>Attach Image</Typography>
             </Grid>
+            <TextField onChange={handleInputChange} name="img" className={classes.input}></TextField>
+          </Grid>
 
-            <Grid className={classes.textFieldContainer4}>
-              <Grid className={classes.textFieldLabelContainer}>
-                <Typography component="h1" className={classes.textFieldLabel}>Price</Typography>
-              </Grid>
-              <TextField onChange={handleInputChange} name="price" className={classes.input}></TextField>
+          <Grid className={classes.tFC3}>
+            <Grid className={classes.tFLC}>
+              <Typography component="h1" className={classes.tFL}>Price</Typography>
             </Grid>
+            <TextField onChange={handleInputChange} name="price" className={classes.input}></TextField>
+          </Grid>
 
-            <Grid className={classes.textFieldContainer4}>
-              <Grid className={classes.textFieldLabelContainer}>
-                <Typography component="h1" className={classes.textFieldLabel}>Address</Typography>
-              </Grid>
-              <TextField onChange={handleInputChange} name="address" className={classes.input}></TextField>
+          <Grid className={classes.tFC3}>
+            <Grid className={classes.tFLC}>
+              <Typography component="h1" className={classes.tFL}>Address</Typography>
             </Grid>
+            <TextField onChange={handleInputChange} name="address" className={classes.input}></TextField>
+          </Grid>
 
-            <Grid className={classes.textFieldContainer4}>
-              <Grid className={classes.textFieldLabelContainer}>
-                <Typography component="h1" className={classes.textFieldLabel}>URL Maps</Typography>
-              </Grid>
-              <TextField onChange={handleInputChange} name="urlMaps" className={classes.input}></TextField>
+          <Grid className={classes.tFC3}>
+            <Grid className={classes.tFLC}>
+              <Typography component="h1" className={classes.tFL}>URL Maps</Typography>
             </Grid>
+            <TextField onChange={handleInputChange} name="urlMaps" className={classes.input}></TextField>
+          </Grid>
 
-            <Grid className={classes.textFieldContainer4}>
-              <Grid className={classes.textFieldLabelContainer}>
-                <Typography component="h1" className={classes.textFieldLabel}>Description</Typography>
-              </Grid>
-              <TextField onChange={handleInputChange} name="description" className={classes.input}></TextField>
+          <Grid className={classes.tFC3}>
+            <Grid className={classes.tFLC}>
+              <Typography component="h1" className={classes.tFL}>Description</Typography>
             </Grid>
+            <TextField onChange={handleInputChange} name="description" className={classes.input}></TextField>
+          </Grid>
 
-            <Grid className={classes.buttonContinue}>
-              <Button color="primary" size="large" variant="contained" onClick={handleSubmit} className={classes.submit}>
-                Publish
-              </Button>
-            </Grid>
+          <Grid className={classes.bC}>
+            <Button color="primary" size="large" variant="contained" onClick={handleSubmit} className={classes.submit}>
+              Publish
+            </Button>
           </Grid>
         </Grid>
-    
-      </Container>
-    </Grid>
+      
+  
+    </Container>
   );
 }
 
