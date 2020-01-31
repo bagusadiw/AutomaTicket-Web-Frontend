@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/AutomaTicket-Web-Frontend/precache-manifest.f01ad7a17860d953d995af7160e508c4.js"
+  "/AutomaTicket-Web-Frontend/precache-manifest.f8e44436940353934de5de3054501e89.js"
 );
 
 self.addEventListener('message', (event) => {
